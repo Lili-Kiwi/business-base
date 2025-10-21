@@ -1,24 +1,15 @@
-import { useState, useEffect, useReducer } from "react";
+import { useEffect } from "react";
 import { URL } from "../shared/constants.jsx";
 import Business from "./Business.jsx";
-import {
-  reducer as businessesReducer,
-  actions as businessesActions,
-  initialState as initialBusinessesState,
-} from "../reducers/businesses.reducer.jsx";
-const AllBusinesses = () => {
-  const [businesses, setBusinesses] = useState([]);
+import { actions as businessActions } from "../reducers/businesses.reducer.jsx";
+import { useBusiness } from "../context/BusinessContext.jsx";
 
+const AllBusinesses = () => {
   const token = `Bearer ${import.meta.env.VITE_PAT}`;
-  const [businessesState, dispatch] = useReducer(
-    businessesReducer,
-    initialBusinessesState
-  );
+  const { state: businessesState, dispatch } = useBusiness();
 
   useEffect(() => {
-    const fetchData = async () => {
-      dispatch({ type: businessesActions.fetchBusinesses });
-
+    const fetchBusinesses = async () => {
       try {
         const options = {
           method: "GET",
@@ -26,26 +17,26 @@ const AllBusinesses = () => {
             Authorization: token,
           },
         };
-
         const resp = await fetch(URL, options);
-
-        const data = await resp.json();
-        setBusinesses(data.records);
+        const records = await resp.json();
+        dispatch({
+          type: businessActions.loadBusinesses,
+          records: records.records,
+        });
       } catch (err) {
         console.error("Failed to fetch records", err);
       }
     };
-    fetchData();
-  }, []);
+    fetchBusinesses();
+  }, [token, dispatch]);
 
   return (
     <>
       <div>All Businesses Page</div>
-
       <ul>
-        {businesses.map((business) => (
+        {businessesState.businessList.map((business) => (
           <li key={business.id}>
-            <Business business={business.fields} />
+            <Business business={business} />
           </li>
         ))}
       </ul>

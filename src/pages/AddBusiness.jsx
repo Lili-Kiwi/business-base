@@ -1,9 +1,15 @@
 import { useState } from "react";
 import { URL, categoryOptions } from "../shared/constants.jsx";
+import { actions as businessActions } from "../reducers/businesses.reducer.jsx";
+import { useBusiness } from "../context/BusinessContext.jsx";
 
 const AddBusiness = () => {
-  const [formData, setFormData] = useState({ name: "", address: "" });
-  const [selectedOption, setSelectedOption] = useState("");
+  const [formData, setFormData] = useState({
+    name: "",
+    address: "",
+    category: "",
+  });
+  const { dispatch } = useBusiness();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -29,7 +35,16 @@ const AddBusiness = () => {
 
     try {
       const resp = await fetch(URL, options);
+      if (!resp.ok) {
+        throw new Error(
+          `Failed to save business: ${resp.status} ${resp.statusText}`
+        );
+      }
       const data = await resp.json();
+      if (data && data.id) {
+        dispatch({ type: businessActions.addBusiness, record: data });
+        setFormData({ name: "", address: "", category: "" });
+      }
     } catch (err) {
       console.error("Failed to add business", err);
     }
@@ -56,7 +71,7 @@ const AddBusiness = () => {
         <select
           id="dropdown"
           name="category"
-          value={selectedOption}
+          value={formData.category}
           onChange={handleChange}
         >
           <option value="" disabled>
@@ -64,7 +79,7 @@ const AddBusiness = () => {
           </option>
 
           {categoryOptions.map((option) => (
-            <option key={option.value} value={option.label}>
+            <option key={option.value} value={option.value}>
               {option.label}
             </option>
           ))}
