@@ -17,7 +17,7 @@ const AllBusinesses = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      dispatch({ type: businessesActions.fetchTodos });
+      dispatch({ type: businessesActions.fetchBusinesses });
 
       try {
         const options = {

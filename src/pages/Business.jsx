@@ -1,5 +1,4 @@
 const Business = ({ business }) => {
-  console.log(business);
   return (
     <div>
       <>

@@ -3,13 +3,13 @@ const initialState = {
 };
 
 const actions = {
-  fetchBusinesses: "fetchTodos",
+  fetchBusinesses: "fetchBusinesses",
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actions.fetchBusinesses:
-      return { ...state, isLoading: true };
+      return { ...state };
     default:
       return state;
   }
