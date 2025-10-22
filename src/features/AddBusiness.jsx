@@ -1,6 +1,17 @@
 import { useState } from "react";
 import { URL, categoryOptions } from "../shared/constants.jsx";
 import { actions as businessesActions } from "../reducers/businesses.reducer.jsx";
+import { FormWrapper, StyledForm, Label, Input, Select, Button } from "./AddBusiness.styles";
+import styled from "styled-components";
+
+const TextArea = styled.textarea`
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  min-height: 80px;
+  resize: vertical;
+`;
 
 const AddBusiness = ({ dispatch }) => {
   const [formData, setFormData] = useState({
@@ -53,11 +64,11 @@ const AddBusiness = ({ dispatch }) => {
   };
 
   return (
-    <>
-      <div>Add Business</div>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Business Name</label>
-        <input
+    <FormWrapper>
+      <h2>Add Business</h2>
+      <StyledForm onSubmit={handleSubmit}>
+        <Label htmlFor="name">Business Name</Label>
+        <Input 
           id="name"
           type="text"
           placeholder="Business Name"
@@ -66,8 +77,8 @@ const AddBusiness = ({ dispatch }) => {
           onChange={handleChange}
         />
 
-        <label htmlFor="address">Address</label>
-        <input
+        <Label htmlFor="address">Address</Label>
+        <Input
           id="address"
           type="text"
           placeholder="Address"
@@ -76,8 +87,8 @@ const AddBusiness = ({ dispatch }) => {
           onChange={handleChange}
         />
 
-        <label htmlFor="phone">Phone</label>
-        <input
+        <Label htmlFor="phone">Phone</Label>
+        <Input
           id="phone"
           type="phone"
           placeholder="Phone"
@@ -86,8 +97,8 @@ const AddBusiness = ({ dispatch }) => {
           onChange={handleChange}
         />
 
-        <label htmlFor="email">Email</label>
-        <input
+        <Label htmlFor="email">Email</Label>
+        <Input
           id="email"
           type="email"
           placeholder="Email"
@@ -96,8 +107,8 @@ const AddBusiness = ({ dispatch }) => {
           onChange={handleChange}
         />
 
-        <label htmlFor="website">Website</label>
-        <input
+        <Label htmlFor="website">Website</Label>
+        <Input
           id="website"
           type="url"
           placeholder="Website"
@@ -106,8 +117,8 @@ const AddBusiness = ({ dispatch }) => {
           onChange={handleChange}
         />
 
-        <label htmlFor="category">Category</label>
-        <select
+        <Label htmlFor="category">Category</Label>
+        <Select
           id="category"
           name="category"
           value={formData.category}
@@ -122,20 +133,19 @@ const AddBusiness = ({ dispatch }) => {
               {option.label}
             </option>
           ))}
-        </select>
+        </Select>
 
-        <label htmlFor="description">Description</label>
-        <input
+        <Label htmlFor="description">Description</Label>
+        <TextArea
           id="description"
-          type="text"
           placeholder="Description"
           value={formData.description}
           name="description"
           onChange={handleChange}
         />
-        <button type="submit">Add Business</button>
-      </form>
-    </>
+        <Button type="submit">Add Business</Button>
+      </StyledForm>
+    </FormWrapper>
   );
 };
 

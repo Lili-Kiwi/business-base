@@ -2,6 +2,8 @@ import { useEffect, dispatch } from "react";
 import { URL } from "../shared/constants.jsx";
 import Business from "./Business.jsx";
 import { actions as businessesActions } from "../reducers/businesses.reducer.jsx";
+import { PageWrapper, Title, BusinessList, BusinessItem, UpdateButton } from "./AllBusinesses.styles";
+import { Loading } from "./AllBusinesses.loading";
 
 const AllBusinesses = ({ isLoading, businessList, dispatch }) => {
   const token = `Bearer ${import.meta.env.VITE_PAT}`;
@@ -40,13 +42,11 @@ const AllBusinesses = ({ isLoading, businessList, dispatch }) => {
             phone: business.phone,
             email: business.email,
             website: business.website,
-
             description: "Updated description",
           },
         },
       ],
     };
-
 
     const options = {
       method: "PATCH",
@@ -55,7 +55,6 @@ const AllBusinesses = ({ isLoading, businessList, dispatch }) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(payload),
-
     };
 
     try {
@@ -65,25 +64,24 @@ const AllBusinesses = ({ isLoading, businessList, dispatch }) => {
         console.error('Error response:', errorData);
         throw new Error(`Update failed: ${resp.status}`);
       }
-      // dispatch({ type: businessesActions.deleteBusiness, id });
     } catch (err) {
       console.error("Failed to update business", err);
     }
   };
 
   return (
-    <>
-      <div>All Businesses Page</div>
-      {isLoading && <p>Loading...</p>}
-      <ul>
+    <PageWrapper>
+      <Title>All Businesses Page</Title>
+      {isLoading && <Loading>Loading...</Loading>}
+      <BusinessList>
         {businessList.map((business) => (
-          <li key={business.id}>
+          <BusinessItem key={business.id}>
             <Business business={business} />
-            <button onClick={() => handlUpdate(business)}>Update</button>
-          </li>
+            <UpdateButton onClick={() => handlUpdate(business)}>Update</UpdateButton>
+          </BusinessItem>
         ))}
-      </ul>
-    </>
+      </BusinessList>
+    </PageWrapper>
   );
 };
 

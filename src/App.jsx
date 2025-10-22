@@ -14,24 +14,27 @@ function App() {
   const [businessesState, dispatch] = useReducer(businessesReducer, initialBusinessesState);
 
   return (
-    < >
+    <div   >
       <Header />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <AllBusinesses
-              isLoading={businessesState.isLoading}
-              businessList={businessesState.businessList} dispatch={dispatch}
-            />
-          }
-        />
-        <Route
-          path="/addBusiness"
-          element={<AddBusiness dispatch={dispatch} />}
-        />
-      </Routes>
-    </>)
+      <div style={{ width: '100vw' }}>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <AllBusinesses
+                isLoading={businessesState.isLoading}
+                businessList={businessesState.businessList} dispatch={dispatch}
+              />
+            }
+          />
+          <Route
+            path="/addBusiness"
+            element={<AddBusiness dispatch={dispatch} />}
+          />
+        </Routes>
+      </div>
+    </div>
+  );
 }
 
 export default App;

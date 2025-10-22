@@ -1,21 +1,30 @@
 import { NavLink } from 'react-router';
+import styled from "styled-components";
+
+const StyledHeader = styled.header`
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  padding: 1rem;
+  background: #282c34;
+  color: #fff;
+`;
+
+const StyledNav = styled.nav`
+  display: flex;
+  gap: 2rem;
+`;
 
 const Header = () => {
   return (
-    <header style={{ padding: "1rem", background: "#282c34", color: "#fff" }}>
-      <nav  >
-        <NavLink
-          to="/"
-        >
-          Home
-        </NavLink>
-        <NavLink
-          to="/addBusiness"
-        >
-          Add Business
-        </NavLink>
-      </nav>    
-      </header>
+    <StyledHeader>
+      <StyledNav>
+        <NavLink to="/">Home</NavLink>
+        <NavLink to="/addBusiness">Add Business</NavLink>
+      </StyledNav>
+    </StyledHeader>
   );
 };
 

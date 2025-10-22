@@ -1,0 +1,48 @@
+import styled from "styled-components";
+
+export const PageWrapper = styled.div`
+  /* max-width removed */
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+`;
+
+export const Title = styled.h2`
+  margin-bottom: 1.5rem;
+  color: #282c34;
+`;
+
+export const BusinessList = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+`;
+
+export const BusinessItem = styled.li`
+  background: #f8f9fa;
+  border-radius: 6px;
+  padding: 1rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const UpdateButton = styled.button`
+  padding: 0.5rem 1rem;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  &:hover {
+    background: #0056b3;
+  }
+`;
