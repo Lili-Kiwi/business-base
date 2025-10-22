@@ -2,11 +2,15 @@ import { useState } from "react";
 import { URL, categoryOptions } from "../shared/constants.jsx";
 import { actions as businessesActions } from "../reducers/businesses.reducer.jsx";
 
-const AddBusiness = () => {
+const AddBusiness = ({dispatch}) => {
   const [formData, setFormData] = useState({
     name: "",
     address: "",
+    phone: "",
+    email: "",
+    website: "",
     category: "",
+    description: "",
   });
 
   const handleSubmit = (e) => {
@@ -41,7 +45,7 @@ const AddBusiness = () => {
       const data = await resp.json();
       if (data && data.id) {
         dispatch({ type: businessesActions.addBusiness, record: data });
-        setFormData({ name: "", address: "", category: "" });
+        setFormData({ name: "", address: "", category: "", phone: "", email: "", website: "", description: "" });
       }
     } catch (err) {
       console.error("Failed to add business", err);
@@ -65,6 +69,24 @@ const AddBusiness = () => {
           name="address"
           value={formData.address}
           onChange={handleChange}
+        /><input
+          type="phone"
+          placeholder="Phone"
+          name="phone"
+          value={formData.phone}
+          onChange={handleChange}
+        /><input
+          type="email"
+          placeholder="Email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+        /><input
+          type="url"
+          placeholder="Website"
+          name="website"
+          value={formData.website}
+          onChange={handleChange}
         />
         <select
           id="dropdown"
@@ -82,6 +104,14 @@ const AddBusiness = () => {
             </option>
           ))}
         </select>
+
+        <input
+          type="text"
+          placeholder="Description"
+          value={formData.description}
+          name="description"
+          onChange={handleChange}
+        />
         <button type="submit">Add Business</button>
       </form>
     </>

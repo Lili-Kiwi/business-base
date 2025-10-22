@@ -9,7 +9,7 @@ const Business = ({ business }) => {
         {business.phone}
         {business.website}
         {business.category}
-        {business.image}
+        {business.description}
       </>
     </div>
   );

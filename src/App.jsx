@@ -22,10 +22,13 @@ function App() {
           element={
             <AllBusinesses
               isLoading={businessesState.isLoading}
-              businessList={businessesState.businessList}
-              dispatch={dispatch}
+              businessList={businessesState.businessList} dispatch={dispatch}
             />
           }
+        />
+        <Route
+          path="/addBusiness"
+          element={<AddBusiness dispatch={dispatch} />}
         />
       </Routes>
     </>)

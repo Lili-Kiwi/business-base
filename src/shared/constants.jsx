@@ -10,5 +10,5 @@ export const categoryOptions = [
   { value: "education", label: "education" },
   { value: "healthcare", label: "healthcare" },
   { value: "retail", label: "retail" },
-  { value: "technology", label: "technology" },
+  { value: "technology", label: "technology" }
 ];
