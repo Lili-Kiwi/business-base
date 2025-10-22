@@ -1,5 +1,5 @@
 const initialState = {
-  businessList: [],
+  businessList: [], isLoading: false,
 };
 
 const actions = {
@@ -11,14 +11,15 @@ const actions = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actions.fetchBusinesses:
-      return { ...state };
+      return { ...state, isLoading: true };
     case actions.loadBusinesses:
       return {
         ...state,
         businessList: action.records.map((record) => ({
           id: record.id,
           ...record.fields,
-        })),
+        })), isLoading: false,
+
       };
     case actions.addBusiness: {
       const savedBusiness = {

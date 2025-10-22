@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { URL, categoryOptions } from "../shared/constants.jsx";
-import { actions as businessActions } from "../reducers/businesses.reducer.jsx";
-import { useBusiness } from "../context/BusinessContext.jsx";
+import { actions as businessesActions } from "../reducers/businesses.reducer.jsx";
 
 const AddBusiness = () => {
   const [formData, setFormData] = useState({
@@ -9,7 +8,6 @@ const AddBusiness = () => {
     address: "",
     category: "",
   });
-  const { dispatch } = useBusiness();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -42,7 +40,7 @@ const AddBusiness = () => {
       }
       const data = await resp.json();
       if (data && data.id) {
-        dispatch({ type: businessActions.addBusiness, record: data });
+        dispatch({ type: businessesActions.addBusiness, record: data });
         setFormData({ name: "", address: "", category: "" });
       }
     } catch (err) {
