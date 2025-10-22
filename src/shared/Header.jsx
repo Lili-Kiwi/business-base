@@ -1,8 +1,21 @@
+import { NavLink } from 'react-router';
+
 const Header = () => {
   return (
     <header style={{ padding: "1rem", background: "#282c34", color: "#fff" }}>
-      <h1>Business Base</h1>
-    </header>
+      <nav  >
+        <NavLink
+          to="/"
+        >
+          Home
+        </NavLink>
+        <NavLink
+          to="/addBusiness"
+        >
+          Add Business
+        </NavLink>
+      </nav>    
+      </header>
   );
 };
 
