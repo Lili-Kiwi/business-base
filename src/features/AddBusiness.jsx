@@ -2,7 +2,7 @@ import { useState } from "react";
 import { URL, categoryOptions } from "../shared/constants.jsx";
 import { actions as businessesActions } from "../reducers/businesses.reducer.jsx";
 
-const AddBusiness = ({dispatch}) => {
+const AddBusiness = ({ dispatch }) => {
   const [formData, setFormData] = useState({
     name: "",
     address: "",
@@ -54,42 +54,61 @@ const AddBusiness = ({dispatch}) => {
 
   return (
     <>
-      <div>AddBusiness</div>
+      <div>Add Business</div>
       <form onSubmit={handleSubmit}>
+        <label htmlFor="name">Business Name</label>
         <input
+          id="name"
           type="text"
           placeholder="Business Name"
           value={formData.name}
           name="name"
           onChange={handleChange}
         />
+
+        <label htmlFor="address">Address</label>
         <input
+          id="address"
           type="text"
           placeholder="Address"
           name="address"
           value={formData.address}
           onChange={handleChange}
-        /><input
+        />
+
+        <label htmlFor="phone">Phone</label>
+        <input
+          id="phone"
           type="phone"
           placeholder="Phone"
           name="phone"
           value={formData.phone}
           onChange={handleChange}
-        /><input
+        />
+
+        <label htmlFor="email">Email</label>
+        <input
+          id="email"
           type="email"
           placeholder="Email"
           name="email"
           value={formData.email}
           onChange={handleChange}
-        /><input
+        />
+
+        <label htmlFor="website">Website</label>
+        <input
+          id="website"
           type="url"
           placeholder="Website"
           name="website"
           value={formData.website}
           onChange={handleChange}
         />
+
+        <label htmlFor="category">Category</label>
         <select
-          id="dropdown"
+          id="category"
           name="category"
           value={formData.category}
           onChange={handleChange}
@@ -105,7 +124,9 @@ const AddBusiness = ({dispatch}) => {
           ))}
         </select>
 
+        <label htmlFor="description">Description</label>
         <input
+          id="description"
           type="text"
           placeholder="Description"
           value={formData.description}
