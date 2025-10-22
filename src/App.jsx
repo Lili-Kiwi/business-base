@@ -1,12 +1,14 @@
-import Header from "./Header";
-import AllBusinesses from "./pages/AllBusinesses.jsx";
-import AddBusiness from "./pages/AddBusiness.jsx";
+import Header from "./shared/Header.jsx";
+import AllBusinesses from "./features/AllBusinesses.jsx";
+import AddBusiness from "./features/AddBusiness.jsx";
 import {
   reducer as businessesReducer,
   actions as businessesActions,
   initialState as initialBusinessesState,
 } from './reducers/businesses.reducer';
 import { useReducer } from 'react';
+import { Routes, Route } from 'react-router';
+
 
 function App() {
   const [businessesState, dispatch] = useReducer(businessesReducer, initialBusinessesState);
@@ -14,11 +16,19 @@ function App() {
   return (
     < >
       <Header />
-      <AddBusiness />
-      <AllBusinesses isLoading={businessesState.isLoading} businessList={businessesState.businessList} dispatch={dispatch}
-      />
-    </ >
-  );
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <AllBusinesses
+              isLoading={businessesState.isLoading}
+              businessList={businessesState.businessList}
+              dispatch={dispatch}
+            />
+          }
+        />
+      </Routes>
+    </>)
 }
 
 export default App;

@@ -37,6 +37,7 @@ const AllBusinesses = ({ isLoading, businessList, dispatch }) => {
           <li key={business.id}>
             <Business business={business} />
           </li>
+          
         ))}
       </ul>
     </>
