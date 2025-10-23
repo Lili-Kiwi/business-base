@@ -16,6 +16,38 @@ const AddBusiness = ({ token, dispatch, URL }) => {
   });
   const [notification, setNotification] = useState("");
 
+
+  const addBusiness = async (business) => {
+    const options = {
+      method: "POST",
+      headers: {
+        Authorization: token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        fields: business,
+      }),
+    };
+
+    try {
+      const resp = await fetch(URL, options);
+      if (!resp.ok) {
+        throw new Error(
+          `Failed to save business: ${resp.status} ${resp.statusText}`
+        );
+      }
+      const data = await resp.json();
+      if (data && data.id) {
+        dispatch({ type: businessesActions.addBusiness, record: data });
+        setFormData({ name: "", address: "", category: "", phone: "", email: "", website: "", description: "" });
+        setNotification("Business was added successfully!");
+        setTimeout(() => setNotification(""), 3000);
+      }
+    } catch (err) {
+      console.error("Failed to add business", err);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     addBusiness(formData);
@@ -27,39 +59,7 @@ const AddBusiness = ({ token, dispatch, URL }) => {
     setFormData({ ...formData, [name]: value });
   };
 
-  useEffect(() => {
 
-    const addBusiness = async (business) => {
-      const options = {
-        method: "POST",
-        headers: {
-          Authorization: token,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          fields: business,
-        }),
-      };
-
-      try {
-        const resp = await fetch(URL, options);
-        if (!resp.ok) {
-          throw new Error(
-            `Failed to save business: ${resp.status} ${resp.statusText}`
-          );
-        }
-        const data = await resp.json();
-        if (data && data.id) {
-          dispatch({ type: businessesActions.addBusiness, record: data });
-          setFormData({ name: "", address: "", category: "", phone: "", email: "", website: "", description: "" });
-          setNotification("Business was added successfully!");
-          setTimeout(() => setNotification(""), 3000);
-        }
-      } catch (err) {
-        console.error("Failed to add business", err);
-      }
-    };
-  }, [token]);
 
   return (
     <FormWrapper>
