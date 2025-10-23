@@ -89,7 +89,7 @@ const AddBusiness = ({ token, dispatch, URL }) => {
         <Label htmlFor="phone">Phone</Label>
         <Input
           id="phone"
-          type="phone"
+          type="tel"
           placeholder="Phone"
           name="phone"
           value={formData.phone}
