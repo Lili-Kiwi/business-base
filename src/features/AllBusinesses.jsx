@@ -1,11 +1,10 @@
-import { useEffect, dispatch } from "react";
-import { URL } from "../shared/constants.jsx";
+import { useEffect } from "react";
 import Business from "./Business.jsx";
 import { actions as businessesActions } from "../reducers/businesses.reducer.jsx";
 import { PageWrapper, Title, BusinessList, BusinessItem, UpdateButton } from "./AllBusinesses.styles";
 import { Loading } from "./AllBusinesses.loading";
 
-const AllBusinesses = ({ isLoading, businessList, dispatch }) => {
+const AllBusinesses = ({ isLoading, businessList, dispatch, URL }) => {
   const token = `Bearer ${import.meta.env.VITE_PAT}`;
   useEffect(() => {
     const fetchBusinesses = async () => {

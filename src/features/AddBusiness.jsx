@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { URL, categoryOptions } from "../shared/constants.jsx";
+import { categoryOptions } from "../shared/constants.jsx";
 import { actions as businessesActions } from "../reducers/businesses.reducer.jsx";
 import { FormWrapper, StyledForm, Label, Input, Select, Button } from "./AddBusiness.styles";
 import styled from "styled-components";
@@ -13,7 +13,7 @@ const TextArea = styled.textarea`
   resize: vertical;
 `;
 
-const AddBusiness = ({ dispatch }) => {
+const AddBusiness = ({ dispatch, URL }) => {
   const [formData, setFormData] = useState({
     name: "",
     address: "",
