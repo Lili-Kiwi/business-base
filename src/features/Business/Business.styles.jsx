@@ -1,14 +1,18 @@
 import styled from "styled-components";
-
-export const BusinessCard = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  padding: 1rem;
-  background: #f4f6fa;
-  border-radius: 6px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-`;
+import React from "react";
+export const BusinessCard = ({ children }) => (
+  <div style={{
+    display: "flex",
+    flexDirection: "column",
+    gap: "0.4rem",
+    padding: "1rem",
+    background: "#f4f6fa",
+    borderRadius: "6px",
+    boxShadow: "0 1px 4px rgba(0,0,0,0.04)"
+  }}>
+    {children}
+  </div>
+);
 
 export const BusinessField = styled.div`
   font-size: 1rem;

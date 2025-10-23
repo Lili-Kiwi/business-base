@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { categoryOptions } from "../../shared/constants.jsx";
 import { actions as businessesActions } from "../../reducers/businesses.reducer.jsx";
-import { FormWrapper, StyledForm, Label, Input, Select, TextArea, Button, Notification } from "./AddBusiness.styles.js";
+import { FormWrapper, StyledForm, Label, Input, Select, TextArea, Button, Notification } from "./AddBusiness.styles.jsx";
 import styled from "styled-components";
 
 const AddBusiness = ({ token, dispatch, URL }) => {
@@ -27,36 +27,39 @@ const AddBusiness = ({ token, dispatch, URL }) => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const addBusiness = async (business) => {
-    const options = {
-      method: "POST",
-      headers: {
-        Authorization: token,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        fields: business,
-      }),
-    };
+  useEffect(() => {
 
-    try {
-      const resp = await fetch(URL, options);
-      if (!resp.ok) {
-        throw new Error(
-          `Failed to save business: ${resp.status} ${resp.statusText}`
-        );
+    const addBusiness = async (business) => {
+      const options = {
+        method: "POST",
+        headers: {
+          Authorization: token,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          fields: business,
+        }),
+      };
+
+      try {
+        const resp = await fetch(URL, options);
+        if (!resp.ok) {
+          throw new Error(
+            `Failed to save business: ${resp.status} ${resp.statusText}`
+          );
+        }
+        const data = await resp.json();
+        if (data && data.id) {
+          dispatch({ type: businessesActions.addBusiness, record: data });
+          setFormData({ name: "", address: "", category: "", phone: "", email: "", website: "", description: "" });
+          setNotification("Business was added successfully!");
+          setTimeout(() => setNotification(""), 3000);
+        }
+      } catch (err) {
+        console.error("Failed to add business", err);
       }
-      const data = await resp.json();
-      if (data && data.id) {
-        dispatch({ type: businessesActions.addBusiness, record: data });
-        setFormData({ name: "", address: "", category: "", phone: "", email: "", website: "", description: "" });
-        setNotification("Business was added successfully!");
-        setTimeout(() => setNotification(""), 3000);
-      }
-    } catch (err) {
-      console.error("Failed to add business", err);
-    }
-  };
+    };
+  }, [token]);
 
   return (
     <FormWrapper>

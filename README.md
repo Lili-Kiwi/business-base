@@ -1,3 +1,6 @@
+
+[GitHub Repository](https://github.com/Lili-Kiwi/business-base)
+
 # Business Base
 
 A React + Vite application for managing and viewing a list of businesses. Features include adding, editing, and updating business details, with a modern UI using styled-components.

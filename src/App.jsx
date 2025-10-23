@@ -1,5 +1,5 @@
 import Header from "./shared/Header.jsx";
-import BusinessList from "./features/BusinessList/BusinessList.jsx";
+import BusinessList from "./pages/BusinessList/BusinessList.jsx";
 import AddBusiness from "./pages/AddBusiness/AddBusiness.jsx";
 import {
   reducer as businessesReducer,
@@ -31,7 +31,7 @@ function App() {
             }
           />
           <Route
-            path="/addBusiness"
+            path="/add-business"
             element={<AddBusiness token={token} dispatch={dispatch} URL={URL} />}
           />
           <Route path="/about" element={<About />} />

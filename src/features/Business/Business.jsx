@@ -1,21 +1,23 @@
 
-import { BusinessCard, BusinessField, BusinessLabel, UpdateButton, TextArea, Actions, EditIcon } from "./Business.styles";
+import { BusinessCard, BusinessField, BusinessLabel, UpdateButton, TextArea, Actions, EditIcon } from "./Business.styles.jsx";
 import { FaPen } from "react-icons/fa";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 
 const Business = ({ URL, token, business }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [updatedDescription, setUpdatedDescription] = useState(business.description || "");
 
-  const handleEdit = (e) => setUpdatedDescription(e.target.value);
+  const handleEdit = useCallback((e) => {
+    setUpdatedDescription(e.target.value);
+  }, []);
 
-  const handleCancel = (e) => {
+  const handleCancel = useCallback((e) => {
     e.preventDefault();
     setUpdatedDescription(business.description || "");
     setIsEditing(false);
-  };
+  }, [business.description]);
 
-  const updateDescription = async (updatedBusiness) => {
+  const updateDescription = useCallback(async (updatedBusiness) => {
     const payload = {
       records: [
         {
@@ -52,13 +54,13 @@ const Business = ({ URL, token, business }) => {
     } catch (err) {
       console.error("Failed to update business", err);
     }
-  };
+  }, [URL, token, business]);
 
-  const handleUpdateSubmit = async (e) => {
+  const handleUpdateSubmit = useCallback(async (e) => {
     e.preventDefault();
     await updateDescription(updatedDescription);
     setIsEditing(false);
-  };
+  }, [updateDescription, updatedDescription]);
 
   return (
     <BusinessCard>
@@ -68,9 +70,6 @@ const Business = ({ URL, token, business }) => {
       <BusinessField><BusinessLabel>Email:</BusinessLabel> {business.email}</BusinessField>
       <BusinessField><BusinessLabel>Website:</BusinessLabel> {business.website}</BusinessField>
       <BusinessField><BusinessLabel>Category:</BusinessLabel> {business.category}</BusinessField>
-
-
-
       <BusinessField>
         <BusinessLabel>Description:</BusinessLabel>
         {isEditing ? (
