@@ -1,3 +1,22 @@
+export const TextArea = styled.textarea`
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  min-height: 80px;
+  resize: vertical;
+`;
+
+export const Notification = styled.div`
+  background: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+  padding: 12px 20px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+  font-size: 1rem;
+  text-align: center;
+`;
 import styled from "styled-components";
 
 export const FormWrapper = styled.div`

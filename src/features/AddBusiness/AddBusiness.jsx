@@ -1,17 +1,8 @@
 import { useState } from "react";
 import { categoryOptions } from "../../shared/constants.jsx";
 import { actions as businessesActions } from "../../reducers/businesses.reducer.jsx";
-import { FormWrapper, StyledForm, Label, Input, Select, Button } from "./AddBusiness.styles.js";
+import { FormWrapper, StyledForm, Label, Input, Select, TextArea, Button, Notification } from "./AddBusiness.styles";
 import styled from "styled-components";
-
-const TextArea = styled.textarea`
-  padding: 0.6rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 1rem;
-  min-height: 80px;
-  resize: vertical;
-`;
 
 const AddBusiness = ({ token, dispatch, URL }) => {
   const [formData, setFormData] = useState({
@@ -23,20 +14,21 @@ const AddBusiness = ({ token, dispatch, URL }) => {
     category: "",
     description: "",
   });
+  const [notification, setNotification] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     addBusiness(formData);
   };
-  
+
   const handleChange = (e) => {
-        e.preventDefault();
-const { name, value } = e.target;
+    e.preventDefault();
+    const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
   const addBusiness = async (business) => {
-     const options = {
+    const options = {
       method: "POST",
       headers: {
         Authorization: token,
@@ -58,6 +50,8 @@ const { name, value } = e.target;
       if (data && data.id) {
         dispatch({ type: businessesActions.addBusiness, record: data });
         setFormData({ name: "", address: "", category: "", phone: "", email: "", website: "", description: "" });
+        setNotification("Business was added successfully!");
+        setTimeout(() => setNotification(""), 3000);
       }
     } catch (err) {
       console.error("Failed to add business", err);
@@ -67,9 +61,10 @@ const { name, value } = e.target;
   return (
     <FormWrapper>
       <h2>Add Business</h2>
+      {notification && <Notification>{notification}</Notification>}
       <StyledForm onSubmit={handleSubmit}>
         <Label htmlFor="name">Business Name</Label>
-        <Input 
+        <Input
           id="name"
           type="text"
           placeholder="Business Name"
@@ -135,18 +130,18 @@ const { name, value } = e.target;
             </option>
           ))}
         </Select>
-<div>
-  <Label htmlFor="description">Description</Label>
-        <TextArea
-          id="description"
-          placeholder="Description"
-          value={formData.description}
-          name="description"
-          onChange={handleChange}
-        />
+        <div>
+          <Label htmlFor="description">Description</Label>
+          <TextArea
+            id="description"
+            placeholder="Description"
+            value={formData.description}
+            name="description"
+            onChange={handleChange}
+          />
+        </div>
         <Button type="submit">Add Business</Button>
-</div>
-        
+
       </StyledForm>
     </FormWrapper>
   );
