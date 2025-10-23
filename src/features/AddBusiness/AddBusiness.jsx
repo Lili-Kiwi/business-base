@@ -13,7 +13,7 @@ const TextArea = styled.textarea`
   resize: vertical;
 `;
 
-const AddBusiness = ({ dispatch, URL }) => {
+const AddBusiness = ({ token, dispatch, URL }) => {
   const [formData, setFormData] = useState({
     name: "",
     address: "",
@@ -28,14 +28,15 @@ const AddBusiness = ({ dispatch, URL }) => {
     e.preventDefault();
     addBusiness(formData);
   };
+  
   const handleChange = (e) => {
-    const { name, value } = e.target;
+        e.preventDefault();
+const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
   const addBusiness = async (business) => {
-    const token = `Bearer ${import.meta.env.VITE_PAT}`;
-    const options = {
+     const options = {
       method: "POST",
       headers: {
         Authorization: token,
@@ -134,8 +135,8 @@ const AddBusiness = ({ dispatch, URL }) => {
             </option>
           ))}
         </Select>
-
-        <Label htmlFor="description">Description</Label>
+<div>
+  <Label htmlFor="description">Description</Label>
         <TextArea
           id="description"
           placeholder="Description"
@@ -144,6 +145,8 @@ const AddBusiness = ({ dispatch, URL }) => {
           onChange={handleChange}
         />
         <Button type="submit">Add Business</Button>
+</div>
+        
       </StyledForm>
     </FormWrapper>
   );

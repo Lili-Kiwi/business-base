@@ -1,5 +1,5 @@
 import Header from "./shared/Header.jsx";
-import AllBusinesses from "./features/AllBusinesses/AllBusinesses.jsx";
+import BusinessList from "./features/BusinessList/BusinessList.jsx";
 import AddBusiness from "./features/AddBusiness/AddBusiness.jsx";
 import {
   reducer as businessesReducer,
@@ -14,6 +14,7 @@ function App() {
  const URL = `https://api.airtable.com/v0/${
   import.meta.env.VITE_BASE_ID
 }/${import.meta.env.VITE_TABLE_NAME}`;
+  const token = `Bearer ${import.meta.env.VITE_PAT}`;
 
   return (
     <div   >
@@ -23,7 +24,7 @@ function App() {
           <Route
             path="/"
             element={
-              <AllBusinesses
+              <BusinessList token={token}
                 isLoading={businessesState.isLoading}
                 businessList={businessesState.businessList} dispatch={dispatch} URL={URL} 
               />
@@ -31,7 +32,7 @@ function App() {
           />
           <Route
             path="/addBusiness"
-            element={<AddBusiness dispatch={dispatch} URL={URL}  />}
+            element={<AddBusiness  token={token} dispatch={dispatch} URL={URL}  />}
           />
         </Routes>
       </div>

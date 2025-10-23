@@ -14,7 +14,7 @@ export const Title = styled.h2`
   color: #282c34;
 `;
 
-export const BusinessList = styled.ul`
+export const BusinessListStyle = styled.ul`
   list-style: none;
   padding: 0;
   margin: 0;
@@ -31,18 +31,4 @@ export const BusinessItem = styled.li`
   display: flex;
   align-items: center;
   justify-content: space-between;
-`;
-
-export const UpdateButton = styled.button`
-  padding: 0.5rem 1rem;
-  background: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background 0.2s;
-  &:hover {
-    background: #0056b3;
-  }
 `;
