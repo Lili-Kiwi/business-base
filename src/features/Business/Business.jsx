@@ -13,7 +13,7 @@ const Business = ({ URL, token, business }) => {
 
   const handleCancel = useCallback((e) => {
     e.preventDefault();
-    setUpdatedDescription(business.description || "");
+    setUpdatedDescription(business.description);
     setIsEditing(false);
   }, [business.description]);
 
@@ -51,6 +51,7 @@ const Business = ({ URL, token, business }) => {
         console.error('Error response:', errorData);
         throw new Error(`Update failed: ${resp.status}`);
       }
+      business.description = updatedBusiness;
     } catch (err) {
       console.error("Failed to update business", err);
     }
