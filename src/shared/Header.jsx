@@ -23,6 +23,11 @@ const Header = () => {
       <StyledNav>
         <NavLink to="/">Home</NavLink>
         <NavLink to="/addBusiness">Add Business</NavLink>
+        <NavLink
+          to="/about"
+        >
+          About
+        </NavLink>
       </StyledNav>
     </StyledHeader>
   );
