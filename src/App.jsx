@@ -1,6 +1,6 @@
 import Header from "./shared/Header.jsx";
-import AllBusinesses from "./features/AllBusinesses.jsx";
-import AddBusiness from "./features/AddBusiness.jsx";
+import AllBusinesses from "./features/AllBusinesses/AllBusinesses.jsx";
+import AddBusiness from "./features/AddBusiness/AddBusiness.jsx";
 import {
   reducer as businessesReducer,
    initialState as initialBusinessesState,

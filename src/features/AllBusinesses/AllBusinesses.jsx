@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import Business from "./Business.jsx";
-import { actions as businessesActions } from "../reducers/businesses.reducer.jsx";
-import { PageWrapper, Title, BusinessList, BusinessItem, UpdateButton } from "./AllBusinesses.styles";
-import { Loading } from "./AllBusinesses.loading";
+import Business from "../Business/Business.jsx";
+import { actions as businessesActions } from "../../reducers/businesses.reducer.jsx";
+import { PageWrapper, Title, BusinessList, BusinessItem, UpdateButton } from "./AllBusinesses.styles.js";
+import { Loading } from "./AllBusinesses.loading.js";
 
 const AllBusinesses = ({ isLoading, businessList, dispatch, URL }) => {
   const token = `Bearer ${import.meta.env.VITE_PAT}`;

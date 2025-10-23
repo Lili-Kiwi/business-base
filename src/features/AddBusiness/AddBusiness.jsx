@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { categoryOptions } from "../shared/constants.jsx";
-import { actions as businessesActions } from "../reducers/businesses.reducer.jsx";
-import { FormWrapper, StyledForm, Label, Input, Select, Button } from "./AddBusiness.styles";
+import { categoryOptions } from "../../shared/constants.jsx";
+import { actions as businessesActions } from "../../reducers/businesses.reducer.jsx";
+import { FormWrapper, StyledForm, Label, Input, Select, Button } from "./AddBusiness.styles.js";
 import styled from "styled-components";
 
 const TextArea = styled.textarea`
